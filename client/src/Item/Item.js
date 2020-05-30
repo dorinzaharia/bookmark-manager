@@ -3,7 +3,7 @@ import './Item.css';
 
 function Item(props) {
   return (
-    <div className="Item">
+    <div className="Item" onClick={props.click}>
       <p>{props.item.name}</p>
       <p>{props.item.snippet}</p>
       <a href={props.item.displayUrl}>{props.item.displayUrl}</a>

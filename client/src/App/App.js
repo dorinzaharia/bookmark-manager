@@ -11,7 +11,7 @@ class App extends Component {
 
     this.state = {
       statusCode: "",
-      items: "",
+      items: [],
       query: "",
       offset: 0,
       count: 10,
@@ -47,15 +47,18 @@ class App extends Component {
     this.search(this.state.query, newOffset);
   }
 
+  handleItemClick = (id) => {
+    const newItemsArray = this.state.items;
+    newItemsArray.splice(id, 1);
+    this.setState({ items: newItemsArray })
+  }
+
   search(query, offset) {
     const url = `${HOSTNAME}${PATHNAME}?q=${query}&count=${this.state.count}&offset=${offset}&mkt=${this.state.mkt}`;
-    console.log('Count ' + this.state.count)
-    console.log('Offset ' + offset)
     fetch(url)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result)
           this.setState({ items: result.webPages.value });
           if (this.state.items) {
             this.setState({ statusCode: 200 });
@@ -72,7 +75,7 @@ class App extends Component {
     let webResults = null;
     let pagingButtons = null;
     if (this.state.statusCode === 200) {
-      webResults = this.state.items.map((item) => <Item item={item} key={item.id} />)
+      webResults = this.state.items.map((item) => <Item item={item} key={item.id} click={() => this.handleItemClick(item.id)} />)
       pagingButtons =
         (<div>
           <button onClick={this.handePrevClick}>
