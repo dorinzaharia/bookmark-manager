@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Item from "../Item/Item";
-import './App.css'
+import './Dashboard.css'
 
 const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 const PATHNAME = process.env.REACT_APP_PATHNAME;
 
-class App extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
 
@@ -18,8 +18,8 @@ class App extends Component {
       mkt: 'en-US'
     };
     this.search = this.search.bind(this);
-    this.handePrevClick = this.handePrevClick.bind(this);
-    this.handePrevClick = this.handePrevClick.bind(this)
+    this.handlePrevClick = this.handlePrevClick.bind(this);
+    this.handleNextClick = this.handleNextClick.bind(this)
   }
 
   handleSubmit = () => {
@@ -33,7 +33,7 @@ class App extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handePrevClick = () => {
+  handlePrevClick = () => {
     if (this.state.offset >= this.state.count) {
       const newOffset = this.state.offset - this.state.count;
       this.setState({ offset: newOffset })
@@ -41,7 +41,7 @@ class App extends Component {
     }
   }
 
-  handeNextClick = () => {
+  handleNextClick = () => {
     const newOffset = this.state.offset + this.state.count;
     this.setState({ offset: newOffset })
     this.search(this.state.query, newOffset);
@@ -78,10 +78,10 @@ class App extends Component {
       webResults = this.state.items.map((item) => <Item item={item} key={item.id} click={() => this.handleItemClick(item.id)} />)
       pagingButtons =
         (<div>
-          <button onClick={this.handePrevClick}>
+          <button onClick={this.handlePrevClick}>
             Prev
         </button>
-          <button onClick={this.handeNextClick}>
+          <button onClick={this.handleNextClick}>
             Next
         </button>
         </div>)
@@ -110,4 +110,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Dashboard;
