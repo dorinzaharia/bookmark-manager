@@ -1,111 +1,38 @@
+// External imports
 import React, { Component } from "react";
-import Item from "../Item/Item";
-import './Dashboard.css'
+import { Layout, Menu, Breadcrumb } from "antd";
+import Title from "antd/lib/typography/Title";
+import Avatar from "antd/lib/avatar/avatar";
+	// External imports: CSS
+import "antd/dist/antd.css";
 
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
-const PATHNAME = process.env.REACT_APP_PATHNAME;
+const { Header, Sider, Content } = Layout;
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      statusCode: "",
-      items: [],
-      query: "",
-      offset: 0,
-      count: 10,
-      mkt: 'en-US'
-    };
-    this.search = this.search.bind(this);
-    this.handlePrevClick = this.handlePrevClick.bind(this);
-    this.handleNextClick = this.handleNextClick.bind(this)
-  }
-
-  handleSubmit = () => {
-    this.setState({ offset: 0 })
-    if (this.state.query) {
-      this.search(this.state.query, this.state.offset);
-    }
-  };
-
-  handleInput = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handlePrevClick = () => {
-    if (this.state.offset >= this.state.count) {
-      const newOffset = this.state.offset - this.state.count;
-      this.setState({ offset: newOffset })
-      this.search(this.state.query, newOffset);
-    }
-  }
-
-  handleNextClick = () => {
-    const newOffset = this.state.offset + this.state.count;
-    this.setState({ offset: newOffset })
-    this.search(this.state.query, newOffset);
-  }
-
-  handleItemClick = (id) => {
-    const newItemsArray = this.state.items;
-    newItemsArray.splice(id, 1);
-    this.setState({ items: newItemsArray })
-  }
-
-  search(query, offset) {
-    const url = `${HOSTNAME}${PATHNAME}?q=${query}&count=${this.state.count}&offset=${offset}&mkt=${this.state.mkt}`;
-    fetch(url)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({ items: result.webPages.value });
-          if (this.state.items) {
-            this.setState({ statusCode: 200 });
-          }
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
-  }
-
   render() {
-
-    let webResults = null;
-    let pagingButtons = null;
-    if (this.state.statusCode === 200) {
-      webResults = this.state.items.map((item) => <Item item={item} key={item.id} click={() => this.handleItemClick(item.id)} />)
-      pagingButtons =
-        (<div>
-          <button onClick={this.handlePrevClick}>
-            Prev
-        </button>
-          <button onClick={this.handleNextClick}>
-            Next
-        </button>
-        </div>)
-    }
-
     return (
-      <div className="app">
-        <h1>Search</h1>
-        <div className="search">
-          <div className="searchBox">
-            <input
-              className="searchInput"
-              onChange={this.handleInput}
-              type="text"
-              name="query">
-            </input>
-            <button className="searchButton" onClick={this.handleSubmit}>
-              Search
-            </button>
-          </div>
-        </div>
-        {webResults}
-        {pagingButtons}
-      </div>
+        <Layout style={{minHeight: "100vh"}}>
+          <Header style={{ padding: 15 }}>
+            <Avatar style={{ float: "right" }} />
+            <Title style={{ color: "white" }} level={3}>
+              App
+            </Title>
+          </Header>
+          <Layout>
+            <Sider >
+              <Menu defaultSelectedKeys={["Dashboard"]} mode="inline">
+                <Menu.Item key="Dashboard">Dashboard</Menu.Item>
+              </Menu>
+            </Sider>
+            <Layout>
+              <Content style={{ padding: "0 40px" }}>
+                <Breadcrumb style={{ margin: "16px 0" }}>
+                  <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+                </Breadcrumb>
+              </Content>
+            </Layout>
+          </Layout>
+        </Layout>
     );
   }
 }
