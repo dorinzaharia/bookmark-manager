@@ -1,7 +1,7 @@
 // External imports
 import React, { Component } from "react";
 import { Layout, Menu, Button } from "antd";
-import Avatar from "antd/lib/avatar/avatar";
+import { Route, Switch } from "react-router-dom";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -12,17 +12,19 @@ import {
 } from "@ant-design/icons";
   // CSS
 import "antd/dist/antd.css";
-import "./Dashboard.css";
+import "./style.css";
 
 // Internal imports
-import BookmarkMenu from "./BookmarkMenu";
+import BookmarkMenu from "../BookmarkMenu";
+import SearchMenu from "../SearchMenu";
+import SettingsMenu from "../SettingsMenu";
+import UserAvatar from "../UserAvatar"
 
 const { Header, Sider, Content } = Layout;
 
 class Dashboard extends Component {
   state = {
     collapsed: false,
-    avatar: "DZ"
   };
 
   toggle = () => {
@@ -35,12 +37,12 @@ class Dashboard extends Component {
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-            <Button type="primary" className="button-add">
-              <PlusSquareOutlined />
-            </Button>
           <BookmarkMenu />
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-              <Menu.Item key="1" icon={<BookOutlined />}></Menu.Item>
+          <SearchMenu />
+          <SettingsMenu />
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]} style={{paddingTop: 50}}>
+              <Menu.Item key="1" icon={<BookOutlined />} >
+              </Menu.Item>
               <Menu.Item key="2" icon={<SearchOutlined />}></Menu.Item>
               <Menu.Item key="3" icon={<SettingOutlined />}></Menu.Item>
             </Menu>
@@ -55,7 +57,7 @@ class Dashboard extends Component {
               }
             )}
             <div className="avatar">
-            <Avatar className="avatar">{this.state.avatar}</Avatar>
+            <UserAvatar avatar="DZ"/>
             </div>
           </Header>
           <Content
@@ -74,3 +76,4 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
+

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Internal imports
-import Dashboard from "./Dashboard/Dashboard"
+import Dashboard from "./components/Navigation/Dashboard"
 
 class App extends Component {
 
