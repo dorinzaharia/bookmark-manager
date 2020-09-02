@@ -5,15 +5,16 @@ import { Route, Switch } from "react-router-dom";
 // Internal imports
 import Dashboard from "./components/Navigation/Dashboard"
 import SignUp from "./components/SignUp"
+import SignIn from "./components/SignIn"
 
 class App extends Component {
 
     render() {
         return (
             <Switch>
-                {/* <Route path="/dashboard" component={Dashboard} /> */}
-                <Route exact path="/" component={SignUp} />
-                
+                <Route exact path="/signin" component={SignIn} />
+                <Route exact path="/signup" component={SignUp} />
+                <Route path="/dashboard" component={Dashboard} />
             </Switch>
         );
     }

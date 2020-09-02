@@ -6,6 +6,7 @@ import {
   Button,
   Typography
 } from 'antd';
+import { NavLink} from "react-router-dom";
 
 // CSS
 import "antd/dist/antd.css";
@@ -136,6 +137,9 @@ class SignUp extends Component {
         <Button type="primary" htmlType="submit">
           Register
         </Button>
+        <div style={{paddingTop: 10}}>
+        Or <NavLink to="/signin" > sign in now!</NavLink>
+        </div>
       </Form.Item>
     </Form>
     </>
