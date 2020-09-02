@@ -1,6 +1,9 @@
 // External imports
 import React, { Component } from "react";
 import { Layout, Menu } from "antd";
+import { Route, Switch, NavLink, Redirect } from "react-router-dom";
+
+  // Icons
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -8,7 +11,9 @@ import {
   BookOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-// CSS
+
+
+  // CSS
 import "antd/dist/antd.css";
 import "./index.css";
 
@@ -18,6 +23,7 @@ import SearchMenu from "../SearchMenu";
 import SettingsMenu from "../SettingsMenu";
 import UserAvatar from "../UserAvatar";
 import BookmarkForm from "../../Bookmark/BookmarkForm";
+import BookmarkCard from "../../Bookmark/BookmarkCard";
 
 const { Header, Sider, Content } = Layout;
 
@@ -32,25 +38,37 @@ class Dashboard extends Component {
     });
   };
 
+
   render() {
+
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="button-add">
             <BookmarkForm />
           </div>
-          <BookmarkMenu />
-          <SearchMenu />
-          <SettingsMenu />
+          <Switch>
+            <Route path="/dashboard/bookmarks" component={BookmarkMenu} />
+            <Route path="/dashboard/search" component={SearchMenu} />
+            <Route path="/dashboard/settings" component={SettingsMenu} />
+            <Redirect from="/dashboard" to="/dashboard/bookmarks" />
+          </Switch>
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={["bookmarks"]}
             style={{ paddingTop: 50 }}
+            onSelect={this.onSelectMenuItem}
           >
-            <Menu.Item key="1" icon={<BookOutlined />}></Menu.Item>
-            <Menu.Item key="2" icon={<SearchOutlined />}></Menu.Item>
-            <Menu.Item key="3" icon={<SettingOutlined />}></Menu.Item>
+            <Menu.Item key="bookmarks" icon={<BookOutlined />}>
+            <NavLink to="/dashboard/bookmarks" />
+            </Menu.Item>
+            <Menu.Item key="search" icon={<SearchOutlined />}>
+              <NavLink to="/dashboard/search" />
+            </Menu.Item>
+            <Menu.Item key="settings" icon={<SettingOutlined />}>
+              <NavLink to="/dashboard/settings" />
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
@@ -73,7 +91,9 @@ class Dashboard extends Component {
               padding: 24,
               minHeight: 280,
             }}
-          ></Content>
+          >
+            <BookmarkCard />
+          </Content>
         </Layout>
       </Layout>
     );
