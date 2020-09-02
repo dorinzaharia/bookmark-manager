@@ -22,7 +22,7 @@ import BookmarkMenu from "../BookmarkMenu";
 import SearchMenu from "../SearchMenu";
 import SettingsMenu from "../SettingsMenu";
 import UserAvatar from "../UserAvatar";
-import BookmarkForm from "../../Bookmark/BookmarkForm";
+import BookmarkNewForm from "../../Bookmark/BookmarkNewForm";
 import BookmarkCard from "../../Bookmark/BookmarkCard";
 
 const { Header, Sider, Content } = Layout;
@@ -38,14 +38,13 @@ class Dashboard extends Component {
     });
   };
 
-
   render() {
 
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="button-add">
-            <BookmarkForm />
+            <BookmarkNewForm />
           </div>
           <Switch>
             <Route path="/dashboard/bookmarks" component={BookmarkMenu} />

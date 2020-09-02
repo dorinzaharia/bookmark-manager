@@ -8,33 +8,20 @@ import "antd/dist/antd.css";
 
 const { Option } = Select;
 
-class BookmarkForm extends Component {
-  state = { visible: false };
-
-  showDrawer = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  onClose = () => {
-    this.setState({
-      visible: false,
-    });
-  };
+class BookmarkEditForm extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
       <>
-        <Button type="primary" onClick={this.showDrawer}>
-          <PlusOutlined />
-        </Button>
         <Drawer
-          title="Add new bookmark"
+          title="Edit bookmark"
           placement="left"
           width={400}
-          onClose={this.onClose}
-          visible={this.state.visible}
+          onClose={this.props.onClose}
+          visible={this.props.visible}
           bodyStyle={{ paddingBottom: 80 }}
           footer={
             <div
@@ -42,10 +29,10 @@ class BookmarkForm extends Component {
                 textAlign: "right",
               }}
             >
-              <Button onClick={this.onClose} style={{ marginRight: 8 }}>
+              <Button onClick={this.props.onClose} style={{ marginRight: 8 }}>
                 Cancel
               </Button>
-              <Button onClick={this.onClose} type="primary">
+              <Button onClick={this.props.onClose} type="primary">
                 Submit
               </Button>
             </div>
@@ -85,4 +72,4 @@ class BookmarkForm extends Component {
   }
 }
 
-export default BookmarkForm;
+export default BookmarkEditForm;
