@@ -11,8 +11,8 @@ class App extends Component {
     render() {
         return (
             <Switch>
-                <Route path="/dashboard" component={Dashboard} />
-                {/* <Route exact path="/" component={SignUp} /> */}
+                {/* <Route path="/dashboard" component={Dashboard} /> */}
+                <Route exact path="/" component={SignUp} />
                 
             </Switch>
         );
