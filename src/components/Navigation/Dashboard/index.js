@@ -60,13 +60,13 @@ class Dashboard extends Component {
             style={{ paddingTop: 50 }}
             onSelect={this.onSelectMenuItem}
           >
-            <Menu.Item key="bookmarks" icon={<BookOutlined />}>
+            <Menu.Item key="bookmarks" title="Bookmarks" icon={<BookOutlined />}>
             <NavLink to="/dashboard/bookmarks" />
             </Menu.Item>
-            <Menu.Item key="search" icon={<SearchOutlined />}>
+            <Menu.Item key="search" title="Search" icon={<SearchOutlined />}>
               <NavLink to="/dashboard/search" />
             </Menu.Item>
-            <Menu.Item key="settings" icon={<SettingOutlined />}>
+            <Menu.Item key="settings" title="Settings" icon={<SettingOutlined />}>
               <NavLink to="/dashboard/settings" />
             </Menu.Item>
           </Menu>

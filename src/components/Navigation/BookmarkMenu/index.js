@@ -1,6 +1,7 @@
 // External imports
 import React from "react";
 import { Menu } from "antd";
+import { NavLink } from "react-router-dom";
 import {
   InboxOutlined,
   FolderOpenOutlined,
@@ -14,18 +15,18 @@ const BookmarkMenu = () => {
   return (
     <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
       <Menu.Item key="1" icon={<AppstoreOutlined />}>
-        All
+        <NavLink to="/dashboard/bookmarks">All</NavLink>
       </Menu.Item>
       <Menu.Item key="2" icon={<InboxOutlined />}>
-        Unsorted
+        <NavLink to="/dashboard/bookmarks/unsorted">Unsorted</NavLink>
       </Menu.Item>
-      <SubMenu
-        key="sub1"
-        icon={<FolderOpenOutlined />}
-        title="Collections"
-      ></SubMenu>
+      <SubMenu key="sub1" icon={<FolderOpenOutlined />} title="Collections">
+        <Menu.Item key="5">
+          <NavLink to="/dashboard/bookmarks">Item</NavLink>
+        </Menu.Item>
+      </SubMenu>
       <Menu.Item key="3" icon={<TagsOutlined />}>
-        Tags
+        <NavLink to="/dashboard/bookmarks/tags">Tags</NavLink>
       </Menu.Item>
     </Menu>
   );

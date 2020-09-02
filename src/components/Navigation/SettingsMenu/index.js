@@ -1,6 +1,7 @@
 // External imports
 import React from "react";
 import { Menu } from "antd";
+import { NavLink } from "react-router-dom";
 import {
   UserOutlined,
   ImportOutlined,
@@ -11,13 +12,13 @@ const SettingsMenu = () => {
   return (
     <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
       <Menu.Item key="1" icon={<UserOutlined />}>
-        Profile
+      <NavLink to="/dashboard/settings">Profile</NavLink>
       </Menu.Item>
       <Menu.Item key="2" icon={<ImportOutlined />}>
-        Import
+      <NavLink to="/dashboard/settings/import">Import</NavLink>
       </Menu.Item>
       <Menu.Item key="3" icon={<ExportOutlined />}>
-        Export
+      <NavLink to="/dashboard/settings/export">Export</NavLink>
       </Menu.Item>
     </Menu>
   );
