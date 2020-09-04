@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Internal imports
-import Dashboard from "./components/Navigation/Dashboard"
-import SignUp from "./components/SignUp"
-import SignIn from "./components/SignIn"
+import Dashboard from "./components/navigation/Dashboard"
+import SignUp from "./components/auth/SignUp"
+import SignIn from "./components/auth/SignIn"
 
 class App extends Component {
 

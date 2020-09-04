@@ -23,15 +23,19 @@ class SignIn extends Component {
       }}
     >
       <Form.Item
-        name="username"
+        name="email"
         rules={[
           {
+            type: 'email',
+            message: 'The input is not valid E-mail!',
+          },
+          {
             required: true,
-            message: 'Please input your Username!',
+            message: 'Please input your Email!',
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
       <Form.Item
         name="password"
@@ -52,7 +56,7 @@ class SignIn extends Component {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-        <div style={{paddingTop: 10}}>
+        <div className="bottom-link">
         Or <NavLink to="/signup" > register now!</NavLink>
         </div>
       </Form.Item>

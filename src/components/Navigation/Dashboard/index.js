@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Layout, Menu } from "antd";
 import { Route, Switch, NavLink, Redirect } from "react-router-dom";
 
-  // Icons
+// Icons
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -12,8 +12,7 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 
-
-  // CSS
+// CSS
 import "antd/dist/antd.css";
 import "./index.css";
 
@@ -22,8 +21,8 @@ import BookmarkMenu from "../BookmarkMenu";
 import SearchMenu from "../SearchMenu";
 import SettingsMenu from "../SettingsMenu";
 import UserAvatar from "../UserAvatar";
-import BookmarkNewForm from "../../Bookmark/BookmarkNewForm";
-import BookmarkCard from "../../Bookmark/BookmarkCard";
+import BookmarkNewForm from "../../bookmark/BookmarkNewForm";
+import BookmarkCard from "../../bookmark/BookmarkCard";
 
 const { Header, Sider, Content } = Layout;
 
@@ -39,6 +38,13 @@ class Dashboard extends Component {
   };
 
   render() {
+    const card = {
+      title: "MyBookmark",
+      description: "MyDescription",
+      url: "https://www.facebook.com/groups/137724296321974",
+      collection: "MyCollection",
+      tags: ["tag1", "tag2", "tag3"],
+    };
 
     return (
       <Layout style={{ minHeight: "100vh" }}>
@@ -59,13 +65,21 @@ class Dashboard extends Component {
             style={{ paddingTop: 50 }}
             onSelect={this.onSelectMenuItem}
           >
-            <Menu.Item key="bookmarks" title="Bookmarks" icon={<BookOutlined />}>
-            <NavLink to="/dashboard/bookmarks" />
+            <Menu.Item
+              key="bookmarks"
+              title="Bookmarks"
+              icon={<BookOutlined />}
+            >
+              <NavLink to="/dashboard/bookmarks" />
             </Menu.Item>
             <Menu.Item key="search" title="Search" icon={<SearchOutlined />}>
               <NavLink to="/dashboard/search" />
             </Menu.Item>
-            <Menu.Item key="settings" title="Settings" icon={<SettingOutlined />}>
+            <Menu.Item
+              key="settings"
+              title="Settings"
+              icon={<SettingOutlined />}
+            >
               <NavLink to="/dashboard/settings" />
             </Menu.Item>
           </Menu>
@@ -88,9 +102,18 @@ class Dashboard extends Component {
             style={{
               margin: "24px 16px",
               padding: 24,
-              minHeight: 280,
+              height: 280,
+              overflow: "auto",
             }}
           >
+            <BookmarkCard
+              title={card.title}
+              description={card.description}
+              url={card.url}
+              collection={card.collection}
+              tags={card.tags}
+              key={card.url}
+            />
             <BookmarkCard />
           </Content>
         </Layout>

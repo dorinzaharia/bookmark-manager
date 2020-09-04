@@ -1,16 +1,21 @@
 import React, { Component } from "react";
-import { Card, Avatar } from "antd";
+import { Card, Avatar, Tag } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { EditOutlined, CopyOutlined, DeleteOutlined } from "@ant-design/icons";
+import BookmarkEditForm from "../BookmarkEditForm";
 import "antd/dist/antd.css";
-import BookmarkEditForm from "../../Bookmark/BookmarkEditForm";
+import "./index.css"
 
 const { Meta } = Card;
 
 class BookmarkCard extends Component {
-  state = {
-    visible: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      visible: false,
+    }
+  }
 
   showDrawer = () => {
     this.setState({
@@ -24,36 +29,57 @@ class BookmarkCard extends Component {
     });
   };
 
+
   render() {
 
-    const item = {
-      name: "MyBookmark",
-      description: "MyDescription",
-      url: "https://facebook.com",
-      favicon: "https://facebook.com/favicon.ico",
+    const { props } = this;
+    const card = {
+      title: props.title,
+      description: props.description,
+      url: props.url,
+      favicon: new URL(props.url).origin + "/favicon.ico",
+      collection: props.collection,
+      tags: props.tags
     };
 
-    const deleteAction = <DeleteOutlined onClick={() => console.log("Click")}/>
-    const editAction = <EditOutlined onClick={this.showDrawer}/>
-    const copyAction = <CopyToClipboard text="afefefefefea"><CopyOutlined/></CopyToClipboard>
+    console.log(card.favicon);
+
+    const deleteAction = (
+      <DeleteOutlined onClick={() => console.log("Click")} />
+    );
+    const editAction = <EditOutlined onClick={this.showDrawer} />;
+    const copyAction = (
+      <CopyToClipboard text="afefefefefea">
+        <CopyOutlined />
+      </CopyToClipboard>
+    );
+    const description = (
+      <div>
+        <p>{card.description}</p>
+        {card.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+        <p style={{paddingTop: 10}}>{card.collection}</p>
+      </div>
+    );
 
     return (
       <div>
-                 <BookmarkEditForm visible={this.state.visible} onClose={this.onClose}/>
-      <Card
-        style={{ marginTop: 16 }}
-        actions={[deleteAction, editAction, copyAction]}
-      >
-        <Meta
-          avatar={<Avatar src={item.favicon} />}
-          title={
-            <a href={item.url} target="_blank" rel="noopener noreferrer">
-              {item.name}
-            </a>
-          }
-          description={item.description}
-        />
-      </Card>
+        <BookmarkEditForm visible={this.state.visible} onClose={this.onClose} />
+        <Card
+          className="card"
+          actions={[deleteAction, editAction, copyAction]}
+          hoverable
+          // small
+        >
+          <Meta
+            avatar={<Avatar src={card.favicon} />}
+            title={
+              <a href={card.url} target="_blank" rel="noopener noreferrer">
+                {card.title}
+              </a>
+            }
+            description={description}
+          />
+        </Card>
       </div>
     );
   }

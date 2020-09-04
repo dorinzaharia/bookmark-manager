@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+.bottom-link {
+  padding-top: 10px;
+}
+
 .element {
   position: absolute;
   left: 50%;
