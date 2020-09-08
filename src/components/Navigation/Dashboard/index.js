@@ -22,7 +22,6 @@ import SearchMenu from "../SearchMenu";
 import SettingsMenu from "../SettingsMenu";
 import UserAvatar from "../UserAvatar";
 import BookmarkNewForm from "../../bookmark/BookmarkNewForm";
-import BookmarkCard from "../../bookmark/BookmarkCard";
 
 const { Header, Sider, Content } = Layout;
 
@@ -38,13 +37,6 @@ class Dashboard extends Component {
   };
 
   render() {
-    const card = {
-      title: "MyBookmark",
-      description: "MyDescription",
-      url: "https://www.facebook.com/groups/137724296321974",
-      collection: "MyCollection",
-      tags: ["tag1", "tag2", "tag3"],
-    };
 
     return (
       <Layout style={{ minHeight: "100vh" }}>
@@ -62,7 +54,7 @@ class Dashboard extends Component {
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={["bookmarks"]}
-            style={{ paddingTop: 50 }}
+            style={{ paddingTop: 50,   position: "absolute", bottom: 0 }}
             onSelect={this.onSelectMenuItem}
           >
             <Menu.Item
@@ -106,15 +98,6 @@ class Dashboard extends Component {
               overflow: "auto",
             }}
           >
-            <BookmarkCard
-              title={card.title}
-              description={card.description}
-              url={card.url}
-              collection={card.collection}
-              tags={card.tags}
-              key={card.url}
-            />
-            <BookmarkCard />
           </Content>
         </Layout>
       </Layout>

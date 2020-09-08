@@ -1,0 +1,10 @@
+.Item {
+    position: relative;
+    width: 60%;
+    margin: 16px auto;
+    border: 2px solid #eee;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 2px 3px #ccc;
+    text-align: center;
+  }
+  

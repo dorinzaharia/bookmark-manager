@@ -1,6 +1,6 @@
 // External imports
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 // Internal imports
 import Dashboard from "./components/navigation/Dashboard"
