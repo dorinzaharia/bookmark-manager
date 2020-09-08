@@ -29,6 +29,15 @@ class BookmarkCard extends Component {
     });
   };
 
+  createIcoURL = () => {
+    try {
+      const url = new URL(this.props.url).origin + "/favicon.ico"
+      return url;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   render() {
 
@@ -37,7 +46,7 @@ class BookmarkCard extends Component {
       title: props.title,
       description: props.description,
       url: props.url,
-      favicon: new URL(props.url).origin + "/favicon.ico",
+      favicon: this.createIcoURL(),
       collection: props.collection,
       tags: props.tags
     };
@@ -49,14 +58,14 @@ class BookmarkCard extends Component {
     );
     const editAction = <EditOutlined onClick={this.showDrawer} />;
     const copyAction = (
-      <CopyToClipboard text="afefefefefea">
+      <CopyToClipboard text={props.url}>
         <CopyOutlined />
       </CopyToClipboard>
     );
     const description = (
       <div>
         <p>{card.description}</p>
-        {card.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
+        {card.tags.map(tag => <Tag key={tag}>#{tag}</Tag>)}
         <p style={{paddingTop: 10}}>{card.collection}</p>
       </div>
     );
